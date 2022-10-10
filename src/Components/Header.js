@@ -1,10 +1,15 @@
-import React from 'react';
 import logo from '../Assets/logos/dailygreen-logo.png'
 import {Link} from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
 
-const Header = () => {
+
+const Header = ({handleCategoryChange, setSelectedCategory}) => {
+
+    const handleClick = () => {
+        setSelectedCategory()
+    }
+
     return (
         <div className="header">
             {/*Logo*/}
@@ -16,15 +21,17 @@ const Header = () => {
             <div className="nav-container">
                 <div className="dropdown">
                     <Link to="/">
-                        <button className="dropbtn">Accueil</button>
+                        <button className="dropbtn" onClick={handleClick}>Accueil</button>
                     </Link>
                 </div>
                 <div className="dropdown">
-                    <button className="dropbtn">Catalogue</button>
+                    <Link to="/">
+                        <button className="dropbtn">Catalogue</button>
+                    </Link>
                     <div className="dropdown-content">
-                        <a href="">Beauté</a>
-                        <a href="">Décoration</a>
-                        <a href="">Entretien</a>
+                        <span id="Hygiène" onClick={handleCategoryChange}>Hygiène</span>
+                        <span id="Décoration" onClick={handleCategoryChange}>Décoration</span>
+                        <span id="Entretien" onClick={handleCategoryChange}>Entretien</span>
                     </div>
                 </div>
                 <div className="dropdown">
@@ -41,12 +48,10 @@ const Header = () => {
             <div className="personal-infos">
                 <Link to="/cart">
                     <ShoppingCartIcon
-                        fontSize="large"
                         style={{color: "white", marginRight: "1em"}}
                     />
                 </Link>
                 <LoginIcon
-                    fontSize="large"
                     style={{color: "white", marginRight: "1em"}}/>
             </div>
 

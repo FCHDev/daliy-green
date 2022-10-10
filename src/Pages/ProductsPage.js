@@ -1,10 +1,14 @@
 import React from 'react';
 import CardProduct from "../Components/CardProduct";
 
-const ProductsPage = () => {
+const ProductsPage = ({filteredList}) => {
+
     return (
+
         <div className="products-page">
-            <CardProduct/>
+            {filteredList.map((item) => (
+                <CardProduct {...item} key={item.id}/>))
+            }
         </div>
     );
 };

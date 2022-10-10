@@ -1,17 +1,39 @@
-import React from 'react';
+import React, {useState} from 'react';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
-const CardProduct = () => {
+const CardProduct = ({name, category, description, price, imgURL, stock}) => {
+    const [heartColor, setHeartColor] = useState("gray")
+
+    const handleChangeHeartColor = () => {
+        heartColor === "gray" ? setHeartColor("#d7263d") : setHeartColor("gray")
+    }
+
     return (
         <div className="card-product">
             <div className="product-pic">
-                <img src="https://www.yebacosmetiques.com/40-large_default/savon-naturel-amande-douce-biologique.jpg" alt="savon"/>
+                <img src={imgURL} alt={name}/>
             </div>
             <div className="product-description">
-                <h1>Super savon</h1>
-                <h3>Produits de beauté</h3>
-                <p>Les huiles végétales issues de l'agriculture biologique (Olive, karité, Colza et coco) sont douces et nourrissantes pour la peau.
-                    Les huiles (olive, colza, coco et karité) issues de l'agriculture biologiques sont nourrissantes.
-                    L'huile de sésame douce a une action apaisante et assouplissante.</p>
+                <h2>{name}</h2>
+                <h3>{category}</h3>
+                <p>{description.substring(0, 210) + "..."}</p>
+            </div>
+            <div className="product-business">
+                <h3 id="price">{price.toFixed(2)}€</h3>
+                <span>Stock : {stock} produits</span>
+                <div className="fav-cart">
+                    <h3><FavoriteIcon
+                        fontSize="large"
+                        style={{color: `${heartColor}`}}
+                        onClick={handleChangeHeartColor}
+                        tag="Add to Fav"
+                    /></h3>
+                    <h3><AddShoppingCartIcon
+                        fontSize="large"
+                        className="addToCart-icon"
+                    /></h3>
+                </div>
             </div>
         </div>
     );
