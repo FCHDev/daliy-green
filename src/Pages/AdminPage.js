@@ -1,17 +1,49 @@
 import React, {useState} from "react";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import {AiFillCaretLeft, AiOutlineUserAdd} from "react-icons/ai";
+
 import {set} from "firebase/database";
 import {refDb} from "../services/firebase-config";
 import {db, storage} from "../services/firebase-config";
-import {MenuItem} from "@mui/material";
 import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
 import {v4} from "uuid";
-import {Link} from "react-router-dom";
 import ScrollToTop from "react-scroll-to-top";
 
+import {AiOutlineUserAdd} from "react-icons/ai";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import {MenuItem} from "@mui/material";
+import {DataGrid} from '@mui/x-data-grid';
+
+
 const AdminPage = ({productsList}) => {
+
+    // TABLE
+
+    const columns = [
+        {field: 'id', headerName: 'ID', type: 'number', width: 70},
+        {field: 'lastName', headerName: 'Produit', width: 250},
+        {
+            field: 'age',
+            headerName: 'Qté stock',
+            type: 'number',
+            width: 90,
+        },
+        {
+            field: 'price',
+            headerName: 'Prix',
+            type: 'number',
+            width: 90,
+        },
+        // {
+        //     field: 'fullName',
+        //     headerName: 'Full name',
+        //     description: 'This column has a value getter and is not sortable.',
+        //     sortable: false,
+        //     width: 160,
+        //     valueGetter: (params) =>
+        //         `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+        // },
+    ];
+
     /// UPLOAD IMAGES
     const [imageUpload, setImageUpload] = useState(null);
     const [picPreview, setPicPreview] = useState();
@@ -87,7 +119,7 @@ const AdminPage = ({productsList}) => {
     };
 
 
-    // FONCTION POUR CREER NOUVEAU GUITARISTE
+    // FONCTION POUR CREER NOUVEAU PRODUIT
     const writeUserData = () => {
         set(refDb(db, `/${id}`), {
             category,
@@ -120,25 +152,35 @@ const AdminPage = ({productsList}) => {
 
     return (
         <div className="admin" id="top">
-            <nav>
-                <Link to="/">
-                    <Button
-                        variant="contained"
-                        className="button-back"
-                        style={{
-                            position: "absolute",
-                            top: "0",
-                            left: "0",
-                            margin: "1vh 0 0 1vw",
-                            backgroundColor:"#22577a",
-                        }}
-                    >
-                        <AiFillCaretLeft/>
-                        <span>Accueil</span>
-                    </Button>
-                </Link>
-            </nav>
-            <h1 style={{marginTop: "0.5em"}}>Ajouter une photo</h1>
+            <h1 style={{margin: "2vh 0"}}>Administration de la base produits</h1>
+
+            <div style={{height: 400, width: '100%', marginTop: "1vh"}}>
+                <DataGrid
+                    rows={productsList.sort(function compare(a, b) {
+                                if (a.id < b.id) return -1;
+                                if (a.id > b.id) return 1;
+                                return 0;
+                            })
+                        .map((item) => (
+                        {
+                            id: parseInt(item.id),
+                            lastName: item.name,
+                            age: item.stock,
+                            price: parseFloat(item.price).toFixed(2) + "€",
+                            selectionModel: ["id"]
+                        }
+                    ))}
+                    columns={columns}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    checkboxSelection
+                />
+
+            </div>
+
+            <div className="separation"></div>
+
+            <h1 style={{marginTop: "4vh"}}>Ajouter une photo</h1>
             <div className="upload-section">
                 <label htmlFor="inputTag">
                     {" "}
@@ -272,7 +314,7 @@ const AdminPage = ({productsList}) => {
                         size="large"
                         endIcon={<AiOutlineUserAdd/>}
                         onClick={handleSubmit}
-                        style={{backgroundColor:"#22577a"}}
+                        style={{backgroundColor: "#22577a"}}
                     >
                         Ajouter
                     </Button>

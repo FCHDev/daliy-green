@@ -6,7 +6,13 @@ import LoginIcon from '@mui/icons-material/Login';
 import SettingsIcon from '@mui/icons-material/Settings';
 
 
-const Header = ({handleCategoryChange, setSelectedCategory}) => {
+const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
+    const totalProducts = productsList.length
+    const totalDecoProducts = productsList.filter((item) => item.category.includes("Décoration")).length
+    const totalEntretienProducts = productsList.filter((item) => item.category.includes("Entretien")).length
+    const totalHygieneProducts = productsList.filter((item) => item.category.includes("Hygiène")).length
+
+
 
     const handleClick = () => {
         setSelectedCategory()
@@ -31,9 +37,10 @@ const Header = ({handleCategoryChange, setSelectedCategory}) => {
                         <button className="dropbtn" onClick={handleClick}>Catalogue</button>
                     </Link>
                     <div className="dropdown-content">
-                        <span id="Hygiène" onClick={handleCategoryChange}>Hygiène</span>
-                        <span id="Décoration" onClick={handleCategoryChange}>Décoration</span>
-                        <span id="Entretien" onClick={handleCategoryChange}>Entretien</span>
+                        <span id="All" onClick={handleClick}>All ({totalProducts})</span>
+                        <span id="Décoration" onClick={handleCategoryChange}>Décoration ({totalDecoProducts})</span>
+                        <span id="Entretien" onClick={handleCategoryChange}>Entretien ({totalEntretienProducts})</span>
+                        <span id="Hygiène" onClick={handleCategoryChange}>Hygiène ({totalHygieneProducts})</span>
                     </div>
                 </div>
                 <div className="dropdown">

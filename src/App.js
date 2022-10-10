@@ -10,6 +10,7 @@ import {useEffect, useMemo, useState} from "react";
 import {onValue, ref} from "firebase/database";
 import {db} from "./services/firebase-config";
 import AdminPage from "./Pages/AdminPage";
+import Footer from "./Components/Footer";
 
 
 function App() {
@@ -47,8 +48,8 @@ function App() {
     return (
         <>
             {/*<CssBaseline />*/}
-            <Container maxWidth="xl" disableGutters={true}>
-                <Header handleCategoryChange={handleCategoryChange} setSelectedCategory={setSelectedCategory}/>
+            <Container maxWidth={false} disableGutters={true}>
+                <Header handleCategoryChange={handleCategoryChange} setSelectedCategory={setSelectedCategory} productsList={productsList}/>
                 <Routes>
                     <Route path="/" element={<ProductsPage filteredList={filteredList}/>}/>
                     <Route path="/notreequipe" element={<OurTeam/>}/>
@@ -56,6 +57,7 @@ function App() {
                     <Route path="/cart" element={<CartPage/>}/>
                     <Route path="/admin" element={<AdminPage productsList={productsList}/>}/>
                 </Routes>
+                <Footer/>
             </Container>
         </>
     );
