@@ -13,7 +13,6 @@ const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
     const totalHygieneProducts = productsList.filter((item) => item.category.includes("Hygiène")).length
 
 
-
     const handleClick = () => {
         setSelectedCategory()
     }
@@ -37,7 +36,9 @@ const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
                         <button className="dropbtn" onClick={handleClick}>Catalogue</button>
                     </Link>
                     <div className="dropdown-content">
-                        <span id="All" onClick={handleClick}>All ({totalProducts})</span>
+                        <Link style={{textDecoration: 'none'}} to="/">
+                            <span id="All" onClick={handleClick}>All ({totalProducts})</span>
+                        </Link>
                         <span id="Décoration" onClick={handleCategoryChange}>Décoration ({totalDecoProducts})</span>
                         <span id="Entretien" onClick={handleCategoryChange}>Entretien ({totalEntretienProducts})</span>
                         <span id="Hygiène" onClick={handleCategoryChange}>Hygiène ({totalHygieneProducts})</span>

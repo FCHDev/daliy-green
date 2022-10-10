@@ -54,7 +54,7 @@ function App() {
                     <Route path="/" element={<ProductsPage filteredList={filteredList}/>}/>
                     <Route path="/notreequipe" element={<OurTeam/>}/>
                     <Route path="/about" element={<About/>}/>
-                    <Route path="/cart" element={<CartPage/>}/>
+                    <Route path="/cart" element={<CartPage productsList={productsList}/>}/>
                     <Route path="/admin" element={<AdminPage productsList={productsList}/>}/>
                 </Routes>
                 <Footer/>

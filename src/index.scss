@@ -149,6 +149,7 @@ body {
   justify-content: center;
   width: 90%;
   margin: 0 auto;
+  padding-top: 1vh;
 }
 
 .ourTeam-page, .about-page, .cart-page {
@@ -177,6 +178,10 @@ body {
   font-size: 1.5em;
   margin-bottom: 0.5em;
   font-family: $font-family-body;
+}
+
+.datagrid {
+  background-color: white;
 }
 
 .admin {
@@ -350,7 +355,22 @@ body {
 }
 
 /*   ******************************** MEDIA QUERIES ********************************   */
-@media screen and (max-width: 428px) {
+
+
+
+@media screen and (max-width: 850px) {
+  .nav-container {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 699px) {
+  .nav-container {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 540px) {
   .header {
     height: 5em;
 
@@ -369,6 +389,9 @@ body {
     justify-content: flex-end;
     align-items: center;
     padding-right: 0;
+  }
+  .admin h1 {
+    font-size: 28px;
   }
 
 }
