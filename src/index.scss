@@ -30,7 +30,7 @@ body {
 
 /*HEADER*/
 .header {
-  height: 6vh;
+  min-height: 7vh;
   //width: 100vw;
   background-color: $darkGreen;
   display: flex;
@@ -80,7 +80,7 @@ body {
   .dropbtn {
     background-color: $darkGreen;
     color: white;
-    padding: 16px;
+    padding: 10px;
     border: none;
     cursor: pointer;
     font-size: $font-title;
