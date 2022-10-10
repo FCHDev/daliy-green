@@ -1,7 +1,9 @@
 import logo from '../Assets/logos/dailygreen-logo.png'
 import {Link} from "react-router-dom";
+
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LoginIcon from '@mui/icons-material/Login';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 
 const Header = ({handleCategoryChange, setSelectedCategory}) => {
@@ -26,7 +28,7 @@ const Header = ({handleCategoryChange, setSelectedCategory}) => {
                 </div>
                 <div className="dropdown">
                     <Link to="/">
-                        <button className="dropbtn">Catalogue</button>
+                        <button className="dropbtn" onClick={handleClick}>Catalogue</button>
                     </Link>
                     <div className="dropdown-content">
                         <span id="Hygiène" onClick={handleCategoryChange}>Hygiène</span>
@@ -53,6 +55,11 @@ const Header = ({handleCategoryChange, setSelectedCategory}) => {
                 </Link>
                 <LoginIcon
                     style={{color: "white", marginRight: "1em"}}/>
+                <Link to="/admin">
+                    <SettingsIcon
+                        style={{color: "white", marginRight: "1em"}}
+                    />
+                </Link>
             </div>
 
         </div>

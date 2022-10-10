@@ -9,6 +9,7 @@ import {useEffect, useMemo, useState} from "react";
 
 import {onValue, ref} from "firebase/database";
 import {db} from "./services/firebase-config";
+import AdminPage from "./Pages/AdminPage";
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
                     <Route path="/notreequipe" element={<OurTeam/>}/>
                     <Route path="/about" element={<About/>}/>
                     <Route path="/cart" element={<CartPage/>}/>
+                    <Route path="/admin" element={<AdminPage productsList={productsList}/>}/>
                 </Routes>
             </Container>
         </>

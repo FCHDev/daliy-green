@@ -15,22 +15,20 @@ const CardProduct = ({name, category, description, price, imgURL, stock}) => {
                 <img src={imgURL} alt={name}/>
             </div>
             <div className="product-description">
-                <h2>{name}</h2>
-                <h3>{category}</h3>
-                <p>{description.substring(0, 210) + "..."}</p>
+                <h3><strong>{name}</strong></h3>
+                <h4>{category}</h4>
+                <p>{description.substring(0, 180) + "..."}</p>
             </div>
             <div className="product-business">
-                <h3 id="price">{price.toFixed(2)}€</h3>
-                <span>Stock : {stock} produits</span>
+                <h3 id="prix">{parseFloat(price).toFixed(2)}€</h3>
+                <span style={{fontSize:"0.7rem"}}><strong>{stock}</strong> produits restants</span>
                 <div className="fav-cart">
                     <h3><FavoriteIcon
-                        fontSize="large"
                         style={{color: `${heartColor}`}}
                         onClick={handleChangeHeartColor}
                         tag="Add to Fav"
                     /></h3>
                     <h3><AddShoppingCartIcon
-                        fontSize="large"
                         className="addToCart-icon"
                     /></h3>
                 </div>
