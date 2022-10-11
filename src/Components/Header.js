@@ -2,8 +2,9 @@ import logo from '../Assets/logos/dailygreen-logo.png'
 import {Link} from "react-router-dom";
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import LoginIcon from '@mui/icons-material/Login';
 import SettingsIcon from '@mui/icons-material/Settings';
+import ModalLogin from "./ModalLogin";
+
 
 
 const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
@@ -68,8 +69,7 @@ const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
                         style={{color: "white", marginRight: "1em"}}
                     />
                 </Link>
-                <LoginIcon
-                    style={{color: "white", marginRight: "1em"}}/>
+                <ModalLogin />
                 <Link to="/admin">
                     <SettingsIcon
                         style={{color: "white", marginRight: "1em"}}

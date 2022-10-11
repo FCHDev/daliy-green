@@ -2,10 +2,9 @@
 
 //COLOR VARIABLES
 //$background: #e9d8a6;
-$background: #B6DEF7;
-$darkGreen: #22577a;
-$green: #08BDBD;
-$red: "#38a3a5";
+$background: #9fc490;
+$darkGreen: #2d6a4f;
+$green: #348aa7;
 
 //FONTS VARIABLES
 $font-title: 1.5em;
@@ -84,7 +83,7 @@ body {
     padding: 10px;
     border: none;
     cursor: pointer;
-    font-size: $font-title;
+    font-size: 30px;
     height: auto;
     font-family: $font-family-title;
     letter-spacing: 0.05vw;
@@ -144,6 +143,17 @@ body {
   }
 }
 
+.modal {
+  position: relative;
+
+  h1 {
+    font-family: $font-family-title;
+    color: $darkGreen;
+    margin-bottom: 1vh;
+    padding-top: 2.5vh;
+  }
+}
+
 
 /*PAGES*/
 .products-page, .ourTeam-page, .about-page, .cart-page {
@@ -169,6 +179,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  //flex-shrink: inherit;
   //flex-wrap: wrap;
   padding: 0 1vw;
   font-size: 1.2rem;
@@ -179,7 +190,8 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
-    width: 550px;
+    min-width: 550px;
+    max-width: 550px;
     min-height: 550px;
     padding: 1vh 0;
   }
@@ -189,10 +201,11 @@ body {
     min-height: 550px;
     border-radius: 8px;
   }
+
   .item-presentation {
     position: relative;
-    height: 550px;
-    width: 70vw;
+    height: 570px;
+    max-width: 70vw;
     background-color: white;
     border-radius: 8px;
     padding: 1vh 1vw;
@@ -201,12 +214,13 @@ body {
       font-family: $font-family-title;
       letter-spacing: 0.05vw;
     }
+
     h1 {
       color: $darkGreen;
     }
 
     h3 {
-      margin-bottom: 2vh;
+      margin-bottom: 1vh;
       color: $green;
     }
 
@@ -214,6 +228,7 @@ body {
       font-family: $font-family-body;
     }
   }
+
   .item-product-business {
     width: 100%;
     min-height: 4vh;
@@ -224,6 +239,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+
     span {
       font-family: $font-family-body;
     }
@@ -257,7 +273,6 @@ body {
   margin-bottom: 0.5em;
   font-family: $font-family-body;
 }
-
 
 
 .datagrid {
@@ -298,7 +313,7 @@ body {
   align-items: center;
   flex-direction: column;
   border-radius: 7px;
-  background-color: #30638e;
+  background-color: $darkGreen;
   font-family: $font-family-body;
 }
 
@@ -428,13 +443,12 @@ body {
 .footer {
   width: 100%;
   height: 4vh;
-  //margin-top: 10px;
   background: $darkGreen;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1em;
+  font-size: 1.1rem;
   font-family: $font-family-body;
   position: absolute;
   bottom: auto;
@@ -442,16 +456,54 @@ body {
 
 /*   ******************************** MEDIA QUERIES ********************************   */
 
+@media screen and (max-width: 1509px) {
+  .item-page {
+    flex-direction: column;
+  }
+  .item-presentation {
+    height: auto;
+    max-width: 60vw;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .header {
+    .dropbtn {
+      font-size: 25px;
+    }
+  }
+}
 
 @media screen and (max-width: 850px) {
   .nav-container {
     font-size: 14px;
+  }
+  .header {
+    .dropbtn {
+      font-size: 20px;
+    }
   }
 }
 
 @media screen and (max-width: 699px) {
   .nav-container {
     font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 679px) {
+  .header {
+    .dropbtn {
+      font-size: 18px;
+    }
+  }
+}
+
+@media screen and (max-width: 632px) {
+  .header {
+    .dropbtn {
+      font-size: 16px;
+    }
   }
 }
 
@@ -475,8 +527,47 @@ body {
     align-items: center;
     padding-right: 0;
   }
+  .item-page {
+    height: auto;
+    max-width: 95vw;
+    margin: 0 auto;
+    padding-bottom: 3vh;
+
+    .item-pic-presentation {
+      margin: 1vh 0;
+      padding: 1vh 0;
+      object-fit: cover;
+      min-width: 10px;
+      min-height: 10px;
+
+      img {
+        min-height: 100px;
+        max-height: 450px;
+        padding: 0.5vh 0.5vw 0 0.5vw;
+        border-radius: 8px;
+      }
+    }
+
+
+    .item-presentation {
+      height: auto;
+      max-width: 100%;
+      margin: 0.5vh 0 2vh 0;
+      padding: 1vh 1vh 10vh 1vh;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1.2rem;
+      }
+    }
+  }
   .admin h1 {
     font-size: 28px;
   }
-
+  .footer {
+    display: none;
+  }
 }

@@ -20,7 +20,7 @@ const AdminPage = ({productsList}) => {
 
     const columns = [
         {field: 'id', headerName: 'ID', type: 'number', width: 70},
-        {field: 'lastName', headerName: 'Produit', width: 250},
+        {field: 'lastName', headerName: 'Produit', width: 900},
         {
             field: 'age',
             headerName: 'Qté stock',
@@ -314,7 +314,7 @@ const AdminPage = ({productsList}) => {
                         size="large"
                         endIcon={<AiOutlineUserAdd/>}
                         onClick={handleSubmit}
-                        style={{backgroundColor: "#22577a"}}
+                        style={{backgroundColor: "#2d6a4f"}}
                     >
                         Ajouter
                     </Button>
