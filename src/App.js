@@ -11,6 +11,7 @@ import {onValue, ref} from "firebase/database";
 import {db} from "./services/firebase-config";
 import AdminPage from "./Pages/AdminPage";
 import Footer from "./Components/Footer";
+import ItemPage from "./Pages/ItemPage";
 
 
 function App() {
@@ -25,7 +26,6 @@ function App() {
                 // eslint-disable-next-line
                 Object.values([data]).map((product) => {
                     setProductsList(product)
-
                 });
             }
         });
@@ -56,6 +56,7 @@ function App() {
                     <Route path="/about" element={<About/>}/>
                     <Route path="/cart" element={<CartPage productsList={productsList}/>}/>
                     <Route path="/admin" element={<AdminPage productsList={productsList}/>}/>
+                    <Route path="item/:id" element={<ItemPage productsList={productsList}/>}/>
                 </Routes>
                 <Footer/>
             </Container>

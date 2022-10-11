@@ -39,9 +39,16 @@ const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
                         <Link style={{textDecoration: 'none'}} to="/">
                             <span id="All" onClick={handleClick}>All ({totalProducts})</span>
                         </Link>
-                        <span id="Décoration" onClick={handleCategoryChange}>Décoration ({totalDecoProducts})</span>
-                        <span id="Entretien" onClick={handleCategoryChange}>Entretien ({totalEntretienProducts})</span>
-                        <span id="Hygiène" onClick={handleCategoryChange}>Hygiène ({totalHygieneProducts})</span>
+                        <Link style={{textDecoration: 'none'}} to="/">
+                            <span id="Décoration" onClick={handleCategoryChange}>Décoration ({totalDecoProducts})</span>
+                        </Link>
+                        <Link style={{textDecoration: 'none'}} to="/">
+                            <span id="Entretien"
+                                  onClick={handleCategoryChange}>Entretien ({totalEntretienProducts})</span>
+                        </Link>
+                        <Link style={{textDecoration: 'none'}} to="/">
+                            <span id="Hygiène" onClick={handleCategoryChange}>Hygiène ({totalHygieneProducts})</span>
+                        </Link>
                     </div>
                 </div>
                 <div className="dropdown">
