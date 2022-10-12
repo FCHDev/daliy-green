@@ -1,12 +1,14 @@
 import logo from '../Assets/logos/dailygreen-logo.png'
 import {Link} from "react-router-dom";
+import ModalLogin from "./ModalLogin";
+import ModalSignUp from "./ModalSignUp";
+import {UserAuth} from "../Context/AuthContext";
+import {useNavigate} from "react-router-dom"
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ModalLogin from "./ModalLogin";
-import ModalSignUp from "./ModalSignUp";
-import {UserAuth} from "../Context/AuthContext";
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 
@@ -15,7 +17,18 @@ const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
     const totalDecoProducts = productsList.filter((item) => item.category.includes("Décoration")).length
     const totalEntretienProducts = productsList.filter((item) => item.category.includes("Entretien")).length
     const totalHygieneProducts = productsList.filter((item) => item.category.includes("Hygiène")).length
-    const {user} = UserAuth()
+    const {user, logout} = UserAuth()
+    const navigate = useNavigate()
+
+    const handleLogout = async () => {
+        try {
+            await logout()
+            navigate('/')
+            alert("Vous êtes bien déconnecté(e) 😢")
+        } catch (e) {
+            console.log(e.message)
+        }
+    }
 
     const connectedUser = (
             <div className="personal-infos">
@@ -32,6 +45,12 @@ const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
                 <Link to="/admin" style={{padding:"6px 8px", height:"36px", width:"64px"}}>
                     <SettingsIcon
                         style={{color: "white"}}
+                    />
+                </Link>
+                <Link to="/" style={{padding:"6px 8px", height:"36px", width:"64px"}}>
+                    <LogoutIcon
+                        style={{color: "white"}}
+                        onClick={handleLogout}
                     />
                 </Link>
             </div>
@@ -54,6 +73,8 @@ const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
     const handleClick = () => {
         setSelectedCategory()
     }
+
+
 
     return (
         <div className="header">
