@@ -6,12 +6,15 @@ import About from "./Pages/About";
 import {Container} from "@mui/material";
 import CartPage from "./Pages/CartPage";
 import {useEffect, useMemo, useState} from "react";
+import {AuthContextProvider} from "./Context/AuthContext";
 
 import {onValue, ref} from "firebase/database";
 import {db} from "./services/firebase-config";
 import AdminPage from "./Pages/AdminPage";
 import Footer from "./Components/Footer";
 import ItemPage from "./Pages/ItemPage";
+import AccountPage from "./Pages/AccountPage";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 
 function App() {
@@ -49,16 +52,23 @@ function App() {
         <>
             {/*<CssBaseline />*/}
             <Container maxWidth={false} disableGutters={true}>
-                <Header handleCategoryChange={handleCategoryChange} setSelectedCategory={setSelectedCategory} productsList={productsList}/>
-                <Routes>
-                    <Route path="/" element={<ProductsPage filteredList={filteredList}/>}/>
-                    <Route path="/notreequipe" element={<OurTeam/>}/>
-                    <Route path="/about" element={<About/>}/>
-                    <Route path="/cart" element={<CartPage productsList={productsList}/>}/>
-                    <Route path="/admin" element={<AdminPage productsList={productsList}/>}/>
-                    <Route path="item/:id" element={<ItemPage productsList={productsList}/>}/>
-                </Routes>
-                <Footer/>
+                <AuthContextProvider>
+                    <Header handleCategoryChange={handleCategoryChange} setSelectedCategory={setSelectedCategory}
+                            productsList={productsList}/>
+                    <Routes>
+                        <Route path="/" element={<ProductsPage filteredList={filteredList}/>}/>
+                        <Route path="/notreequipe" element={<OurTeam/>}/>
+                        <Route path="/about" element={<About/>}/>
+                        <Route path="/cart" element={<CartPage productsList={productsList}/>}/>
+                        <Route path="/account" element={
+                            <ProtectedRoute>
+                                <AccountPage/>
+                            </ProtectedRoute>}/>
+                        <Route path="/admin" element={<AdminPage productsList={productsList}/>}/>
+                        <Route path="item/:id" element={<ItemPage productsList={productsList}/>}/>
+                    </Routes>
+                    <Footer/>
+                </AuthContextProvider>
             </Container>
         </>
     );

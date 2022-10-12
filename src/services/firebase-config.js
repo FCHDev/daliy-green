@@ -1,7 +1,7 @@
 import {initializeApp} from "firebase/app";
 import {getStorage} from "firebase/storage"
 import {getDatabase, ref} from "firebase/database";
-// import {getAuth} from "firebase/auth";
+import {getAuth} from "firebase/auth";
 
 const configInfos = {
     apiKey: process.env.REACT_APP_CLE_API,
@@ -18,4 +18,7 @@ export const db = getDatabase(appFirebase);
 export const refDb = (a, b) => {
     return ref(a, b);
 };
-// export const auth = getAuth(appFirebase);
+export const auth = getAuth(appFirebase);
+// console.log(process.env.REACT_APP_CLE_API)
+// console.log(typeof process.env.REACT_APP_CLE_API)
+// console.log(typeof "dailygreen-f7cd1.firebaseapp.com")

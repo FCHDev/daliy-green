@@ -1,10 +1,8 @@
-import React from 'react';
-
 import Button from "@mui/material/Button";
 import CloseIcon from '@mui/icons-material/Close';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import LoginIcon from "@mui/icons-material/Login";
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import TextField from "@mui/material/TextField";
 import {UserAuth} from "../Context/AuthContext"
 import {useState} from "react";
@@ -27,29 +25,26 @@ const style = {
     pb: 5,
 };
 
-const ModalLogin = () => {
-    const [open, setOpen] = React.useState(false);
-    const { signIn } = UserAuth();
-
+const ModalSignUp = () => {
+    // CONST & VARIABLES
+    const [open, setOpen] = useState(false);
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     // eslint-disable-next-line
     const [error, setError] = useState('')
+    const { createUser } = UserAuth()
     const navigate = useNavigate()
 
-    const handleOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false)
-    };
+
+    // COMPORTEMENTS
+    const handleOpen = () => {setOpen(true)};
+    const handleClose = () => {setOpen(false)};
     const handleSubmit = async (e) => {
         e.preventDefault()
         setError('')
-        try {
-            await signIn(email, password)
+        try{
+            await createUser(email, password)
             navigate('/account')
-            console.log(email)
         } catch (e) {
             setError(e.message)
             console.log(e.message)
@@ -59,9 +54,9 @@ const ModalLogin = () => {
 
 
     return (
-        <React.Fragment>
+        <>
             <Button onClick={handleOpen}>
-                <LoginIcon
+                <AddCircleIcon
                     style={{color: "white", marginRight: "1em"}}/>
             </Button>
 
@@ -72,14 +67,13 @@ const ModalLogin = () => {
                 aria-labelledby="child-modal-title"
                 aria-describedby="child-modal-description"
             >
-                {/*<ClickAwayListener onClickAway={handleClose}>*/}
                 <Box sx={{...style, width: 400}}>
                     <div className="modal">
                         <CloseIcon
                             onClick={handleClose}
-                            style={{position: "absolute", top: "0", right: "0", cursor: "pointer"}}
+                            style={{position:"absolute", top:"0", right:"0", cursor:"pointer"}}
                             fontSize="large"/>
-                        <h1>Connectez-vous</h1>
+                        <h1>Inscrivez-vous</h1>
                         <TextField
                             required
                             id="email"
@@ -87,9 +81,7 @@ const ModalLogin = () => {
                             placeholder="jean.dupont@email.fr"
                             margin="dense"
                             style={{margin: "1vh 0"}}
-                            onChange={(e) => {
-                                setEmail(e.target.value)
-                            }}
+                            onChange={(e) => {setEmail(e.target.value)}}
                         />
                         <TextField
                             id="password"
@@ -97,18 +89,15 @@ const ModalLogin = () => {
                             type="password"
                             autoComplete="current-password"
                             margin="dense"
-                            onChange={(e) => {
-                                setPassword(e.target.value)
-                            }}
+                            onChange={(e) => {setPassword(e.target.value)}}
                         />
                     </div>
                     <Button onClick={handleSubmit} variant="contained"
-                            style={{marginTop: "2vh", backgroundColor: "#2d6a4f"}}>Connexion</Button>
+                            style={{marginTop: "2vh", backgroundColor: "#2d6a4f"}}>Create Account</Button>
                 </Box>
-                {/*</ClickAwayListener>*/}
             </Modal>
-        </React.Fragment>
+        </>
     );
 }
 
-export default ModalLogin;
+export default ModalSignUp;

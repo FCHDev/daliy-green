@@ -17,7 +17,7 @@ const CardProduct = ({name, category, description, price, imgURL, stock, id}) =>
                     <img src={imgURL} alt={name}/>
                 </div>
                 <div className="product-description">
-                    <h3><strong>{name}</strong></h3>
+                    <h2><strong>{name}</strong></h2>
                     <h4>{category}</h4>
                     <p>{description.substring(0, 180) + "..."}</p>
                 </div>

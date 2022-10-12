@@ -3,7 +3,10 @@ import {Link} from "react-router-dom";
 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SettingsIcon from '@mui/icons-material/Settings';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ModalLogin from "./ModalLogin";
+import ModalSignUp from "./ModalSignUp";
+import {UserAuth} from "../Context/AuthContext";
 
 
 
@@ -12,6 +15,40 @@ const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
     const totalDecoProducts = productsList.filter((item) => item.category.includes("Décoration")).length
     const totalEntretienProducts = productsList.filter((item) => item.category.includes("Entretien")).length
     const totalHygieneProducts = productsList.filter((item) => item.category.includes("Hygiène")).length
+    const {user} = UserAuth()
+
+    const connectedUser = (
+            <div className="personal-infos">
+                <Link to="/account" style={{padding:"6px 8px", height:"36px", width:"64px"}}>
+                    <AccountCircleIcon
+                        style={{color: "white"}}
+                    />
+                </Link>
+                <Link to="/cart" style={{padding:"6px 8px", height:"36px", width:"64px"}}>
+                    <ShoppingCartIcon
+                        style={{color: "white"}}
+                    />
+                </Link>
+                <Link to="/admin" style={{padding:"6px 8px", height:"36px", width:"64px"}}>
+                    <SettingsIcon
+                        style={{color: "white"}}
+                    />
+                </Link>
+            </div>
+        )
+
+    const notConnectedUser = (
+        <div className="personal-infos">
+            <ModalLogin />
+            <ModalSignUp />
+            <Link to="/cart" style={{padding:"6px 8px", height:"36px", width:"64px"}}>
+                <ShoppingCartIcon
+                    style={{color: "white"}}
+                />
+            </Link>
+        </div>
+    )
+
 
 
     const handleClick = () => {
@@ -63,19 +100,8 @@ const Header = ({handleCategoryChange, setSelectedCategory, productsList}) => {
                     </Link>
                 </div>
             </div>
-            <div className="personal-infos">
-                <Link to="/cart">
-                    <ShoppingCartIcon
-                        style={{color: "white", marginRight: "1em"}}
-                    />
-                </Link>
-                <ModalLogin />
-                <Link to="/admin">
-                    <SettingsIcon
-                        style={{color: "white", marginRight: "1em"}}
-                    />
-                </Link>
-            </div>
+
+            {!user ? notConnectedUser : connectedUser}
 
         </div>
     );
